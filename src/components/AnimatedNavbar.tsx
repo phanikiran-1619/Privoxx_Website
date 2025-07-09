@@ -4,7 +4,7 @@ import logoIP from "@/assets/logo-ip.png";
 
 export const AnimatedNavbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [navState, setNavState] = useState<'icon-center' | 'full-nav' | 'icon-right'>('icon-center');
+  const [navState, setNavState] = useState<'bubble' | 'expanded' | 'bubble-right'>('bubble');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,12 +18,12 @@ export const AnimatedNavbar = () => {
       const leadershipSection = document.getElementById('company');
       const leadershipTop = leadershipSection?.offsetTop || 0;
       
-      if (currentScrollY < heroHeight * 0.8) {
-        setNavState('icon-center');
+      if (currentScrollY < heroHeight * 0.2) {
+        setNavState('bubble');
       } else if (currentScrollY < leadershipTop - 200) {
-        setNavState('full-nav');
+        setNavState('expanded');
       } else {
-        setNavState('icon-right');
+        setNavState('bubble-right');
       }
     };
 
@@ -34,123 +34,103 @@ export const AnimatedNavbar = () => {
   }, []);
 
   const getNavbarClasses = () => {
-    const baseClasses = "fixed top-0 w-full z-50 transition-all duration-700 ease-in-out";
+    const baseClasses = "fixed top-6 z-50 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]";
     
     switch (navState) {
-      case 'icon-center':
-        return `${baseClasses} bg-transparent backdrop-blur-sm`;
-      case 'full-nav':
-        return `${baseClasses} bg-primary-foreground/95 backdrop-blur-md shadow-medium border-b border-border`;
-      case 'icon-right':
-        return `${baseClasses} bg-transparent backdrop-blur-sm`;
+      case 'bubble':
+        return `${baseClasses} left-1/2 transform -translate-x-1/2`;
+      case 'expanded':
+        return `${baseClasses} left-1/2 transform -translate-x-1/2`;
+      case 'bubble-right':
+        return `${baseClasses} right-6`;
       default:
         return baseClasses;
     }
   };
 
-  const getContentClasses = () => {
+  const getContainerClasses = () => {
+    const baseClasses = "transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] backdrop-blur-md shadow-strong";
+    
     switch (navState) {
-      case 'icon-center':
-        return "flex justify-center items-center py-4 px-8";
-      case 'full-nav':
-        return "section-container flex items-center justify-between py-4";
-      case 'icon-right':
-        return "flex justify-end items-center py-4 px-8";
+      case 'bubble':
+        return `${baseClasses} bg-primary-foreground/90 rounded-full p-3 w-16 h-16 flex items-center justify-center`;
+      case 'expanded':
+        return `${baseClasses} bg-primary-foreground/95 border border-border/20 rounded-full px-8 py-4 flex items-center justify-between min-w-[600px]`;
+      case 'bubble-right':
+        return `${baseClasses} bg-primary-foreground/90 rounded-full p-3 w-16 h-16 flex items-center justify-center`;
       default:
-        return "flex justify-center items-center py-4 px-8";
+        return baseClasses;
     }
   };
 
-  const getLiquidMorphClasses = () => {
-    const baseClasses = "transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]";
-    
+  const getLogoClasses = () => {
     switch (navState) {
-      case 'icon-center':
-        return `${baseClasses} transform scale-100 opacity-100`;
-      case 'full-nav':
-        return `${baseClasses} transform scale-110 opacity-100`;
-      case 'icon-right':
-        return `${baseClasses} transform scale-95 opacity-90`;
+      case 'bubble':
+        return "h-10 w-10 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]";
+      case 'expanded':
+        return "h-12 w-12 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]";
+      case 'bubble-right':
+        return "h-10 w-10 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]";
       default:
-        return baseClasses;
+        return "h-10 w-10";
     }
   };
 
   return (
     <nav className={getNavbarClasses()}>
-      <div className={getContentClasses()}>
-        {/* Logo/Icon - Always present */}
-        <div className={getLiquidMorphClasses()}>
-          <div className="flex items-center space-x-3 group cursor-pointer">
-            <div className="relative">
-              <img 
-                src={logoIP} 
-                alt="Privoxx IP Logo" 
-                className={`transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-                  navState === 'full-nav' ? 'h-10 w-10' : 'h-12 w-12'
-                } group-hover:scale-110`}
-              />
-              {/* Liquid glow effect */}
-              <div className={`absolute inset-0 bg-secondary/20 rounded-full blur-lg transition-all duration-700 ${
-                navState === 'full-nav' ? 'scale-150 opacity-100' : 'scale-100 opacity-60'
-              } group-hover:scale-200 group-hover:opacity-80`}></div>
-            </div>
-            
-            {/* Company name with liquid animation */}
-            <span className={`font-bold transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-              navState === 'full-nav' 
-                ? 'text-2xl text-primary opacity-100 translate-x-0' 
-                : navState === 'icon-center'
-                ? 'text-2xl text-primary-foreground opacity-100 translate-x-0'
-                : 'text-xl text-primary-foreground opacity-80 translate-x-0'
-            } group-hover:text-secondary`}>
-              Privoxx
-            </span>
+      <div className={getContainerClasses()}>
+        {/* Logo Section */}
+        <div className="flex items-center space-x-3 group cursor-pointer">
+          <div className="relative">
+            <img 
+              src={logoIP} 
+              alt="Privoxx IP Logo" 
+              className={`${getLogoClasses()} group-hover:scale-110 transition-transform duration-300`}
+            />
+            {/* Liquid glow effect */}
+            <div className={`absolute inset-0 bg-secondary/30 rounded-full blur-md transition-all duration-1000 ${
+              navState === 'expanded' ? 'scale-150 opacity-100' : 'scale-100 opacity-60'
+            } group-hover:scale-200 group-hover:opacity-80`}></div>
           </div>
+          
+          {/* Company name - visible in expanded state */}
+          <span className={`font-bold text-primary transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+            navState === 'expanded' 
+              ? 'text-xl opacity-100 translate-x-0' 
+              : 'text-xl opacity-0 -translate-x-4 absolute'
+          } group-hover:text-secondary`}>
+            Privoxx
+          </span>
         </div>
 
-        {/* Full Navigation - Only visible in full-nav state */}
-        <div className={`transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-          navState === 'full-nav' 
+        {/* Navigation Menu - Only visible in expanded state */}
+        <div className={`transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+          navState === 'expanded' 
             ? 'opacity-100 translate-x-0 scale-100' 
-            : 'opacity-0 translate-x-8 scale-95 pointer-events-none'
+            : 'opacity-0 translate-x-8 scale-95 pointer-events-none absolute'
         }`}>
-          <div className="flex items-center space-x-8">
-            <nav className="hidden md:flex items-center space-x-6">
+          <div className="flex items-center space-x-6">
+            <nav className="hidden md:flex items-center space-x-5">
               <a 
                 href="#products" 
-                className="text-primary/80 hover:text-primary transition-all duration-300 hover:scale-105 font-medium relative group"
+                className="text-primary/80 hover:text-primary transition-all duration-300 hover:scale-105 font-medium text-sm relative group px-3 py-2 rounded-full hover:bg-accent"
               >
                 Products
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></div>
+                <div className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-6"></div>
               </a>
               <a 
                 href="#privacy-benefits-section" 
-                className="text-primary/80 hover:text-primary transition-all duration-300 hover:scale-105 font-medium relative group"
-              >
-                Benefits
-              </a>
-              <a 
-                href="#testimonials" 
-                className="text-primary/80 hover:text-primary transition-all duration-300 hover:scale-105 font-medium relative group"
+                className="text-primary/80 hover:text-primary transition-all duration-300 hover:scale-105 font-medium text-sm relative group px-3 py-2 rounded-full hover:bg-accent"
               >
                 Reviews
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></div>
-              </a>
-              <a 
-                href="#company" 
-                className="text-primary/80 hover:text-primary transition-all duration-300 hover:scale-105 font-medium relative group"
-              >
-                Company
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></div>
+                <div className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-6"></div>
               </a>
             </nav>
             
-            {/* CTA Button with liquid morph */}
+            {/* CTA Button */}
             <Button 
-              variant="outline" 
               size="sm" 
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-glow"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:scale-105 hover:shadow-glow text-sm px-6 py-2 rounded-full"
               onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Book Demo
@@ -159,12 +139,12 @@ export const AnimatedNavbar = () => {
         </div>
       </div>
       
-      {/* Liquid background morphing effect */}
-      <div className={`absolute inset-0 -z-10 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-        navState === 'full-nav'
-          ? 'bg-gradient-to-r from-primary-foreground via-accent to-primary-foreground opacity-95'
-          : 'bg-transparent opacity-0'
-      }`}></div>
+      {/* Water ripple effect on hover */}
+      <div className={`absolute inset-0 rounded-full transition-all duration-500 pointer-events-none ${
+        navState === 'bubble' || navState === 'bubble-right'
+          ? 'bg-gradient-to-r from-secondary/10 to-primary/10 scale-100'
+          : 'bg-transparent scale-110'
+      } group-hover:scale-125 group-hover:opacity-50`}></div>
     </nav>
   );
 };
