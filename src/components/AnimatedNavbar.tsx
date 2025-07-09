@@ -5,8 +5,16 @@ import visualLogo from "/visual logo.png";
 export const AnimatedNavbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [navState, setNavState] = useState<'bubble' | 'expanded' | 'bubble-right'>('bubble');
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setScrollPosition(currentScrollY);
@@ -18,20 +26,33 @@ export const AnimatedNavbar = () => {
       const leadershipSection = document.getElementById('company');
       const leadershipTop = leadershipSection?.offsetTop || 0;
       
-      if (currentScrollY < heroHeight * 0.2) {
-        setNavState('bubble-right');
-      } else if (currentScrollY < leadershipTop - 200) {
-        setNavState('expanded');
+      // Never expand on mobile - always stay as bubble or bubble-right
+      if (isMobile) {
+        if (currentScrollY < heroHeight * 0.2) {
+          setNavState('bubble-right');
+        } else {
+          setNavState('bubble-right');
+        }
       } else {
-        setNavState('bubble-right');
+        // Desktop behavior
+        if (currentScrollY < heroHeight * 0.2) {
+          setNavState('bubble-right');
+        } else if (currentScrollY < leadershipTop - 200) {
+          setNavState('expanded');
+        } else {
+          setNavState('bubble-right');
+        }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial call
     
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, [isMobile]);
 
   const getNavbarClasses = () => {
     const baseClasses = "fixed top-6 z-50 transition-all duration-[2000ms] ease-out";
@@ -114,8 +135,8 @@ export const AnimatedNavbar = () => {
             </div>
           )}
           
-          {/* Expanded state content */}
-          {navState === 'expanded' && (
+          {/* Expanded state content - Only on desktop */}
+          {navState === 'expanded' && !isMobile && (
             <>
               {/* Logo in expanded state */}
               <div className="relative">
@@ -134,8 +155,8 @@ export const AnimatedNavbar = () => {
           )}
         </div>
 
-        {/* Navigation Menu - Only visible in expanded state */}
-        {navState === 'expanded' && (
+        {/* Navigation Menu - Only visible in expanded state and on desktop */}
+        {navState === 'expanded' && !isMobile && (
           <div className="transition-all duration-1800 ease-out relative z-10 opacity-100 translate-x-0 scale-100 delay-700">
             <div className="flex items-center space-x-6">
               <nav className="hidden md:flex items-center space-x-5">
