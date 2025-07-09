@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import logoIP from "@/assets/logo-ip.png";
+import { WaterLogo } from "@/components/WaterLogo";
 
 export const AnimatedNavbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -63,16 +63,16 @@ export const AnimatedNavbar = () => {
     }
   };
 
-  const getLogoClasses = () => {
+  const getLogoSize = () => {
     switch (navState) {
       case 'bubble':
-        return "h-10 w-10 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]";
+        return 40;
       case 'expanded':
-        return "h-12 w-12 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]";
+        return 48;
       case 'bubble-right':
-        return "h-10 w-10 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]";
+        return 40;
       default:
-        return "h-10 w-10";
+        return 40;
     }
   };
 
@@ -81,14 +81,13 @@ export const AnimatedNavbar = () => {
       <div className={getContainerClasses()}>
         {/* Logo Section */}
         <div className="flex items-center space-x-3 group cursor-pointer">
-          <div className="relative">
-            <img 
-              src={logoIP} 
-              alt="Privoxx IP Logo" 
-              className={`${getLogoClasses()} group-hover:scale-110 transition-transform duration-300`}
+          <div className="relative transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110">
+            <WaterLogo 
+              size={getLogoSize()} 
+              isExpanded={navState === 'expanded'}
             />
-            {/* Liquid glow effect */}
-            <div className={`absolute inset-0 bg-secondary/30 rounded-full blur-md transition-all duration-1000 ${
+            {/* Additional water ripple effect */}
+            <div className={`absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-blue-400/20 rounded-full blur-lg transition-all duration-1000 ${
               navState === 'expanded' ? 'scale-150 opacity-100' : 'scale-100 opacity-60'
             } group-hover:scale-200 group-hover:opacity-80`}></div>
           </div>
@@ -98,7 +97,7 @@ export const AnimatedNavbar = () => {
             navState === 'expanded' 
               ? 'text-xl opacity-100 translate-x-0' 
               : 'text-xl opacity-0 -translate-x-4 absolute'
-          } group-hover:text-secondary`}>
+          } group-hover:text-cyan-600`}>
             Privoxx
           </span>
         </div>
@@ -142,8 +141,8 @@ export const AnimatedNavbar = () => {
       {/* Water ripple effect on hover */}
       <div className={`absolute inset-0 rounded-full transition-all duration-500 pointer-events-none ${
         navState === 'bubble' || navState === 'bubble-right'
-          ? 'bg-gradient-to-r from-secondary/10 to-primary/10 scale-100'
-          : 'bg-transparent scale-110'
+          ? 'bg-gradient-to-r from-cyan-400/10 via-blue-400/10 to-cyan-500/10 scale-100'
+          : 'bg-gradient-to-r from-cyan-300/5 via-blue-300/5 to-cyan-400/5 scale-110'
       } group-hover:scale-125 group-hover:opacity-50`}></div>
     </nav>
   );
