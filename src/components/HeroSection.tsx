@@ -1,21 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import heroImage from "@/assets/hero-products.jpg";
-import logoIP from "@/assets/logo-ip.png";
+import VariableProximity from "@/components/VariableProximity";
+import { useRef } from "react";
 
 export const HeroSection = () => {
+  const containerRef = useRef(null);
+  
   return (
     <section className="relative min-h-screen overflow-hidden">
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-primary bg-[length:400%_400%] animate-[gradient_15s_ease_infinite]" />
       
-      {/* Floating Geometric Shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-primary-foreground/10 rounded-full animate-[float_6s_ease-in-out_infinite]" />
-        <div className="absolute top-40 right-20 w-24 h-24 bg-secondary/20 rounded-full animate-[float_8s_ease-in-out_infinite_reverse]" />
-        <div className="absolute bottom-40 left-1/4 w-20 h-20 bg-primary-foreground/15 rounded-full animate-[float_7s_ease-in-out_infinite]" />
-        <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-secondary/25 rounded-full animate-[float_9s_ease-in-out_infinite_reverse]" />
-      </div>
+
       
       {/* Particle Pattern */}
       <div className="absolute inset-0 opacity-20">
@@ -30,16 +27,30 @@ export const HeroSection = () => {
 
 
       {/* Hero Content */}
-      <div className="relative z-10 section-container pt-16">
+      <div className="relative z-10 section-container pt-16" ref={containerRef}>
         <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[90vh]">
           {/* Left Column - Content */}
           <div className="space-y-8">
             <div className="space-y-6">
               <h1 className="hero-heading animate-fade-in-up">
-                Instant Privacy.
+                <VariableProximity
+                  label="Instant Privacy."
+                  fromFontVariationSettings="'wght' 700"
+                  toFontVariationSettings="'wght' 900"
+                  containerRef={containerRef}
+                  radius={100}
+                  falloff="exponential"
+                />
                 <br />
                 <span className="bg-gradient-to-r from-secondary-light to-secondary bg-clip-text text-transparent">
-                  Anytime. Anywhere.
+                  <VariableProximity
+                    label="Anytime. Anywhere."
+                    fromFontVariationSettings="'wght' 700"
+                    toFontVariationSettings="'wght' 900"
+                    containerRef={containerRef}
+                    radius={100}
+                    falloff="exponential"
+                  />
                 </span>
               </h1>
               
@@ -91,18 +102,15 @@ export const HeroSection = () => {
               <img 
                 src={heroImage} 
                 alt="Privoxx Privacy Solutions - Three Product Variants"
-                className="w-full h-auto rounded-2xl shadow-strong animate-float"
+                className="w-full h-auto rounded-2xl shadow-strong"
               />
               
               {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 bg-secondary text-secondary-foreground px-4 py-2 rounded-full text-sm font-semibold shadow-medium animate-float [animation-delay:0.5s]">
-                New Launch!
+              <div className="absolute -top-4 -right-4 bg-secondary text-secondary-foreground px-4 py-2 rounded-full text-sm font-semibold shadow-medium animate-float [animation-delay:1.2s]">
+                Coming soon
               </div>
               
-              <div className="absolute -bottom-4 -left-4 bg-primary-foreground text-primary px-6 py-3 rounded-xl shadow-medium animate-float [animation-delay:1s]">
-                <div className="text-sm font-medium">Starting from</div>
-                <div className="text-lg font-bold">₹19,999</div>
-              </div>
+
             </div>
           </div>
         </div>

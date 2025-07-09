@@ -12,20 +12,6 @@ const benefits = [
     statLabel: "Privacy Guaranteed"
   },
   {
-    icon: Sparkles,
-    title: "Hygiene First",
-    description: "Clean, personal space every time with antimicrobial materials",
-    stat: "99.9%",
-    statLabel: "Germ Protection"
-  },
-  {
-    icon: Heart,
-    title: "Dignity Preserved",
-    description: "Comfortable changing without compromise in any environment",
-    stat: "500+",
-    statLabel: "Happy Users"
-  },
-  {
     icon: Maximize,
     title: "Space Efficient",
     description: "Minimal footprint, maximum utility with smart design",
@@ -53,16 +39,8 @@ export const ScrollingPrivacyBenefits = () => {
       
       setScrollProgress(progress);
       
-      // Determine which benefits to show based on scroll progress
-      if (progress < 0.25) {
-        setVisibleBenefits([0, 1]);
-      } else if (progress < 0.5) {
-        setVisibleBenefits([1, 2]);
-      } else if (progress < 0.75) {
-        setVisibleBenefits([2, 3]);
-      } else {
-        setVisibleBenefits([3, 0]);
-      }
+      // Show only the two remaining benefits without auto-swapping
+      setVisibleBenefits([0, 1]);
     };
 
     window.addEventListener('scroll', handleScroll);

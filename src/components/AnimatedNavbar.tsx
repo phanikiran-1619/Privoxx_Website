@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import logoIP from "@/assets/logo-ip.png";
+import visualLogo from "/visual logo.png";
 
 export const AnimatedNavbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -34,7 +34,7 @@ export const AnimatedNavbar = () => {
   }, []);
 
   const getNavbarClasses = () => {
-    const baseClasses = "fixed top-6 z-50 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]";
+    const baseClasses = "fixed top-6 z-50 transition-all duration-[2000ms] ease-out";
     
     switch (navState) {
       case 'bubble':
@@ -49,15 +49,15 @@ export const AnimatedNavbar = () => {
   };
 
   const getContainerClasses = () => {
-    const baseClasses = "transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] backdrop-blur-xl relative overflow-hidden";
+    const baseClasses = "transition-all duration-[2000ms] ease-out backdrop-blur-xl relative overflow-hidden";
     
     switch (navState) {
       case 'bubble':
-        return `${baseClasses} bg-gradient-to-br from-cyan-300/35 via-blue-300/30 to-cyan-400/35 border border-cyan-200/50 rounded-full p-3 w-16 h-16 flex items-center justify-center shadow-[0_8px_32px_rgba(6,182,212,0.3)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.4)] origin-center`;
+         return `${baseClasses} bg-gradient-to-br from-cyan-300/35 via-blue-300/30 to-cyan-400/35 border border-cyan-200/50 rounded-full p-4 w-16 h-16 flex items-center justify-center shadow-[0_8px_32px_rgba(6,182,212,0.3)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.4)]`;
       case 'expanded':
-        return `${baseClasses} bg-gradient-to-r from-cyan-300/30 via-blue-200/25 to-cyan-300/30 border border-cyan-200/40 rounded-full px-8 py-4 flex items-center justify-between min-w-[720px] shadow-[0_12px_48px_rgba(6,182,212,0.25)] hover:shadow-[0_16px_56px_rgba(6,182,212,0.35)] origin-right`;
+         return `${baseClasses} bg-gradient-to-r from-cyan-300/30 via-blue-200/25 to-cyan-300/30 border border-cyan-200/40 rounded-full px-8 py-2 flex items-center justify-between min-w-[720px] shadow-[0_12px_48px_rgba(6,182,212,0.25)] hover:shadow-[0_16px_56px_rgba(6,182,212,0.35)]`;
       case 'bubble-right':
-        return `${baseClasses} bg-gradient-to-br from-cyan-300/35 via-blue-300/30 to-cyan-400/35 border border-cyan-200/50 rounded-full p-3 w-16 h-16 flex items-center justify-center shadow-[0_8px_32px_rgba(6,182,212,0.3)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.4)] origin-right`;
+         return `${baseClasses} bg-gradient-to-br from-cyan-300/35 via-blue-300/30 to-cyan-400/35 border border-cyan-200/50 rounded-full p-4 w-16 h-16 flex items-center justify-center shadow-[0_8px_32px_rgba(6,182,212,0.3)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.4)]`;
       default:
         return baseClasses;
     }
@@ -66,104 +66,114 @@ export const AnimatedNavbar = () => {
   const getLogoClasses = () => {
     switch (navState) {
       case 'bubble':
-        return "h-10 w-10 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]";
+         return "w-10 h-10 object-contain transition-all duration-1000 ease-out filter drop-shadow-lg";
       case 'expanded':
-        return "h-12 w-12 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]";
+         return "w-10 h-10 object-contain transition-all duration-1000 ease-out filter drop-shadow-lg";
       case 'bubble-right':
-        return "h-10 w-10 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]";
+         return "w-10 h-10 object-contain transition-all duration-1000 ease-out filter drop-shadow-lg";
       default:
-        return "h-10 w-10";
+        return "w-16 h-16 object-contain filter drop-shadow-lg";
+    }
+  };
+
+  const getTextClasses = () => {
+    switch (navState) {
+      case 'expanded':
+        return "text-2xl font-bold text-primary transition-all duration-1500 ease-out opacity-100 scale-100 translate-x-0 delay-500";
+      default:
+        return "text-2xl font-bold text-primary transition-all duration-1000 ease-out opacity-0 scale-90 translate-x-4 absolute pointer-events-none";
     }
   };
 
   return (
     <nav className={getNavbarClasses()}>
       <div className={getContainerClasses()}>
-        {/* Animated water background layers */}
+        {/* Animated background effects */}
         <div className="absolute inset-0 rounded-full overflow-hidden">
-          {/* Primary water layer */}
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-blue-400/10 animate-[wave_4s_ease-in-out_infinite]"></div>
-          
-          {/* Secondary water layer */}
-          <div className="absolute inset-0 bg-gradient-to-tl from-cyan-300/8 via-blue-200/5 to-cyan-400/8 animate-[wave_6s_ease-in-out_infinite_reverse] delay-1000"></div>
-          
-          {/* Flowing water particles */}
-          <div className="absolute inset-0">
-            <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-cyan-300/20 rounded-full animate-[float_3s_ease-in-out_infinite] blur-sm"></div>
-            <div className="absolute top-3/4 right-1/3 w-1.5 h-1.5 bg-blue-300/15 rounded-full animate-[float_4s_ease-in-out_infinite_reverse] delay-500 blur-sm"></div>
-            <div className="absolute bottom-1/3 left-2/3 w-1 h-1 bg-cyan-400/25 rounded-full animate-[float_5s_ease-in-out_infinite] delay-1500 blur-sm"></div>
-          </div>
-          
-          {/* Water surface shimmer */}
-          <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-cyan-200/10 to-transparent animate-[shimmer_3s_ease-in-out_infinite] ${
-            navState === 'expanded' ? 'opacity-100' : 'opacity-70'
-          }`}></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-blue-400/10 animate-pulse"></div>
+          <div className="absolute inset-0 bg-gradient-to-tl from-cyan-300/8 via-blue-200/5 to-cyan-400/8 animate-pulse delay-1000"></div>
         </div>
 
         {/* Logo Section */}
         <div className="flex items-center space-x-3 group cursor-pointer relative z-10">
-          <div className="relative">
-            <img 
-              src={logoIP} 
-              alt="Privoxx IP Logo" 
-              className={`${getLogoClasses()} group-hover:scale-110 transition-transform duration-300 relative z-10`}
-            />
-            {/* Liquid glow effect */}
-            <div className={`absolute inset-0 bg-gradient-to-br from-cyan-400/30 to-blue-400/20 rounded-full blur-md transition-all duration-1000 ${
-              navState === 'expanded' ? 'scale-150 opacity-100' : 'scale-100 opacity-60'
-            } group-hover:scale-200 group-hover:opacity-80 animate-pulse`}></div>
-          </div>
+          {/* Visual Logo - Always visible in bubble states */}
+          {(navState === 'bubble' || navState === 'bubble-right') && (
+            <div className="relative flex items-center justify-center w-full h-full">
+              <img 
+                src={visualLogo} 
+                alt="Privoxx Visual Logo" 
+                className={`${getLogoClasses()} group-hover:scale-110 transition-transform duration-500 relative z-20 brightness-110 contrast-125`}
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  objectFit: 'contain'
+                }}
+              />
+              {/* Enhanced glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/30 to-blue-400/20 rounded-full blur-lg transition-all duration-1000 scale-100 opacity-60 group-hover:scale-150 group-hover:opacity-80"></div>
+            </div>
+          )}
           
-          {/* Company name - only visible in expanded state */}
+          {/* Expanded state content */}
           {navState === 'expanded' && (
-            <span className="font-bold text-primary transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] relative z-10 text-xl group-hover:text-cyan-600">
-              Privoxx
-            </span>
+            <>
+              {/* Logo in expanded state */}
+              <div className="relative">
+                <img 
+                  src={visualLogo} 
+                  alt="Privoxx Visual Logo" 
+                  className={getLogoClasses()}
+                />
+              </div>
+              
+              {/* Brand Text */}
+              <span className={getTextClasses()}>
+                Privoxx
+              </span>
+            </>
           )}
         </div>
 
         {/* Navigation Menu - Only visible in expanded state */}
-        <div className={`transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] relative z-10 ${
-          navState === 'expanded' 
-            ? 'opacity-100 translate-x-0 scale-100' 
-            : 'opacity-0 translate-x-8 scale-95 pointer-events-none absolute'
-        }`}>
-          <div className="flex items-center space-x-6">
-            <nav className="hidden md:flex items-center space-x-5">
-              <a 
-                href="#products" 
-                className="text-primary/80 hover:text-cyan-600 transition-all duration-300 hover:scale-105 font-medium text-sm relative group px-3 py-2 rounded-full hover:bg-cyan-50/20"
+        {navState === 'expanded' && (
+          <div className="transition-all duration-1800 ease-out relative z-10 opacity-100 translate-x-0 scale-100 delay-700">
+            <div className="flex items-center space-x-6">
+              <nav className="hidden md:flex items-center space-x-5">
+                <a 
+                  href="#products" 
+                  className="text-primary/80 hover:text-cyan-600 transition-all duration-800 hover:scale-105 font-medium text-sm relative group px-3 py-2 rounded-full hover:bg-cyan-50/20 transform translate-y-0 opacity-100 delay-900"
+                >
+                  Products
+                  <div className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-6"></div>
+                </a>
+                <a 
+                  href="#privacy-benefits-section" 
+                  className="text-primary/80 hover:text-cyan-600 transition-all duration-800 hover:scale-105 font-medium text-sm relative group px-3 py-2 rounded-full hover:bg-cyan-50/20 transform translate-y-0 opacity-100 delay-1100"
+                >
+                  Reviews
+                  <div className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-6"></div>
+                </a>
+              </nav>
+              
+              {/* CTA Button */}
+              <Button 
+                size="sm" 
+                className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:from-cyan-600 hover:to-blue-600 transition-all duration-800 hover:scale-105 hover:shadow-[0_8px_32px_rgba(6,182,212,0.4)] text-sm px-6 py-2 rounded-full border border-cyan-300/20 transform translate-y-0 opacity-100 scale-100 delay-1300"
+                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Products
-                <div className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-6"></div>
-              </a>
-              <a 
-                href="#privacy-benefits-section" 
-                className="text-primary/80 hover:text-cyan-600 transition-all duration-300 hover:scale-105 font-medium text-sm relative group px-3 py-2 rounded-full hover:bg-cyan-50/20"
-              >
-                Reviews
-                <div className="absolute -bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-6"></div>
-              </a>
-            </nav>
-            
-            {/* CTA Button */}
-            <Button 
-              size="sm" 
-              className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_32px_rgba(6,182,212,0.4)] text-sm px-6 py-2 rounded-full border border-cyan-300/20"
-              onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Book Demo
-            </Button>
+                Book Demo
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       
-      {/* Enhanced water ripple effect on hover */}
+      {/* Enhanced ripple effect */}
       <div className={`absolute inset-0 rounded-full transition-all duration-500 pointer-events-none ${
         navState === 'bubble' || navState === 'bubble-right'
           ? 'bg-gradient-to-r from-cyan-400/5 via-blue-300/8 to-cyan-400/5 scale-100'
           : 'bg-gradient-to-r from-cyan-300/3 via-blue-200/5 to-cyan-300/3 scale-110'
-      } group-hover:scale-125 group-hover:from-cyan-400/15 group-hover:via-blue-300/20 group-hover:to-cyan-400/15 animate-[ripple_2s_ease-out_infinite]`}></div>
+      } group-hover:scale-125 group-hover:from-cyan-400/15 group-hover:via-blue-300/20 group-hover:to-cyan-400/15`}></div>
     </nav>
   );
 };

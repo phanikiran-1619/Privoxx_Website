@@ -43,16 +43,16 @@ export const ProductDetails = () => {
           </p>
         </div>
 
-        {/* Single Product - Compact Layout */}
-        <div className="max-w-4xl mx-auto">
+        {/* Single Product - Expanded Layout */}
+        <div className="max-w-6xl mx-auto">
           <Card className="card-hover group overflow-hidden ring-2 ring-secondary">
-            <div className="bg-secondary text-secondary-foreground text-center py-2 text-sm font-semibold">
+            <div className="bg-secondary text-secondary-foreground text-center py-3 text-base font-semibold">
               Most Popular - Flagship Solution
             </div>
             
-            <div className="grid lg:grid-cols-2 gap-8 p-8">
+            <div className="grid lg:grid-cols-5 gap-10 p-10">
               {/* Left - Media Gallery */}
-              <div className="relative overflow-hidden rounded-xl h-96">
+              <div className="lg:col-span-2 relative overflow-hidden rounded-xl h-96">
                 <div className="relative h-full">
                   {!isShowingVideo ? (
                     <img 
@@ -86,7 +86,7 @@ export const ProductDetails = () => {
               </div>
 
               {/* Right - Content */}
-              <div className="space-y-6 flex flex-col justify-center">
+              <div className="lg:col-span-3 space-y-6 flex flex-col justify-center">
                 <div>
                   <span className="text-sm text-secondary font-medium uppercase tracking-wide">
                     {wallMountedProduct.subtitle}
@@ -122,7 +122,7 @@ export const ProductDetails = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center bg-gradient-primary rounded-2xl p-6 text-primary-foreground mt-12 max-w-3xl mx-auto">
+        <div className="text-center bg-gradient-primary rounded-2xl p-8 text-primary-foreground mt-12 max-w-4xl mx-auto">
           <h3 className="text-xl font-bold mb-3">
             Ready to Transform Your Space?
           </h3>
