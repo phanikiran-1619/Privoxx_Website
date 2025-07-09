@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Shield, Sparkles, Heart, Maximize } from "lucide-react";
+import { PrivacyStats } from "./PrivacyStats";
+import { SolutionShowcase } from "./SolutionShowcase";
 
 const benefits = [
   {
@@ -113,6 +115,12 @@ export const ScrollingPrivacyBenefits = () => {
               })}
             </div>
 
+            {/* Privacy Statistics Component */}
+            <PrivacyStats />
+            
+            {/* Solution Showcase Component */}
+            <SolutionShowcase />
+            
             {/* Expanded Privoxx Difference Section */}
             <div className="bg-accent rounded-2xl p-8 w-full">
               <h3 className="text-2xl font-bold text-primary mb-6 text-center">The Privoxx Difference:</h3>

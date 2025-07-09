@@ -5,7 +5,8 @@ import { ArrowRight, Home, ChevronLeft, ChevronRight, Check } from "lucide-react
 import wallMountedImage from "@/assets/wall-mounted.jpg";
 import stationaryImage from "@/assets/stationary.jpg";
 
-const productImages = [wallMountedImage, stationaryImage];
+const productImages = [wallMountedImage];
+const productVideo = "https://www.w3schools.com/html/mov_bbb.mp4"; // Sample video - replace with actual product video
 
 const wallMountedProduct = {
   id: 'wall-mounted',
@@ -23,14 +24,10 @@ const wallMountedProduct = {
 };
 
 export const ProductDetails = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isShowingVideo, setIsShowingVideo] = useState(false);
 
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % productImages.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + productImages.length) % productImages.length);
+  const toggleContent = () => {
+    setIsShowingVideo(!isShowingVideo);
   };
 
   return (
@@ -53,43 +50,34 @@ export const ProductDetails = () => {
               Most Popular - Flagship Solution
             </div>
             
-            <div className="grid lg:grid-cols-2 gap-6 p-6">
-              {/* Left - Image Gallery */}
-              <div className="relative overflow-hidden rounded-xl">
-                <div className="relative">
-                  <img 
-                    src={productImages[currentImageIndex]} 
-                    alt={wallMountedProduct.title}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+            <div className="grid lg:grid-cols-2 gap-8 p-8">
+              {/* Left - Media Gallery */}
+              <div className="relative overflow-hidden rounded-xl h-96">
+                <div className="relative h-full">
+                  {!isShowingVideo ? (
+                    <img 
+                      src={productImages[0]} 
+                      alt={wallMountedProduct.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <video 
+                      controls
+                      className="w-full h-full object-cover"
+                      poster={productImages[0]}
+                    >
+                      <source src={productVideo} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
                   
-                  {/* Image Navigation */}
+                  {/* Media Toggle Button */}
                   <button
-                    onClick={prevImage}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 transition-all duration-200 hover:scale-110"
+                    onClick={toggleContent}
+                    className="absolute bottom-4 right-4 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition-colors"
                   >
-                    <ChevronLeft className="h-4 w-4 text-primary" />
+                    {isShowingVideo ? 'Show Image' : 'Play Video'}
                   </button>
-                  
-                  <button
-                    onClick={nextImage}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 transition-all duration-200 hover:scale-110"
-                  >
-                    <ChevronRight className="h-4 w-4 text-primary" />
-                  </button>
-                  
-                  {/* Image Indicators */}
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2">
-                    {productImages.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentImageIndex(index)}
-                        className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                          index === currentImageIndex ? 'bg-white' : 'bg-white/50'
-                        }`}
-                      />
-                    ))}
-                  </div>
                 </div>
                 
                 <div className="absolute top-4 left-4 bg-primary text-primary-foreground p-3 rounded-full">
@@ -98,49 +86,34 @@ export const ProductDetails = () => {
               </div>
 
               {/* Right - Content */}
-              <div className="space-y-4">
+              <div className="space-y-6 flex flex-col justify-center">
                 <div>
                   <span className="text-sm text-secondary font-medium uppercase tracking-wide">
                     {wallMountedProduct.subtitle}
                   </span>
-                  <h3 className="text-2xl font-bold text-primary mt-2 mb-3">
+                  <h3 className="text-3xl font-bold text-primary mt-2 mb-4">
                     {wallMountedProduct.title}
                   </h3>
-                  <p className="text-base text-muted-foreground leading-relaxed">
+                  <p className="text-lg text-muted-foreground leading-relaxed">
                     {wallMountedProduct.description}
                   </p>
                 </div>
 
                 {/* Features */}
                 <div>
-                  <h4 className="font-bold text-primary mb-3 text-base">Key Features:</h4>
-                  <div className="grid grid-cols-2 gap-2">
+                  <h4 className="font-bold text-primary mb-4 text-lg">Key Features:</h4>
+                  <div className="grid grid-cols-1 gap-3">
                     {wallMountedProduct.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center">
-                        <Check className="h-4 w-4 text-secondary mr-2 flex-shrink-0" />
-                        <span className="text-sm text-muted-foreground">{feature}</span>
+                        <Check className="h-5 w-5 text-secondary mr-3 flex-shrink-0" />
+                        <span className="text-base text-muted-foreground">{feature}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Use Cases */}
-                <div>
-                  <h4 className="font-bold text-primary mb-3 text-base">Perfect for:</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {wallMountedProduct.useCases.map((useCase, idx) => (
-                      <span 
-                        key={idx}
-                        className="bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-xs font-medium"
-                      >
-                        {useCase}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <Button size="lg" className="btn-hero group w-full">
-                  Book Demo Now
+                <Button size="lg" className="btn-hero group w-full mt-auto">
+                  Coming Soon
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </div>
