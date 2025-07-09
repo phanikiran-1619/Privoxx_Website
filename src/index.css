@@ -145,11 +145,11 @@
   
   /* Section Containers */
   .section-container {
-    @apply max-w-7xl mx-auto px-container-padding;
+    @apply max-w-7xl mx-auto px-8;
   }
   
   .section-padding {
-    @apply py-section-padding;
+    @apply py-20;
   }
   
   /* Text Styles */
