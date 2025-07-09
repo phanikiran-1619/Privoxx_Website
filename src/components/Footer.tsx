@@ -7,14 +7,17 @@ import visualLogo from "/visual logo.png";
 
 export const Footer = () => {
   return (
-    <footer className="bg-slate-900 text-white relative overflow-hidden">
-      {/* Boxes Animation Background */}
-      <div className="absolute inset-0 z-0">
-        <Boxes className="opacity-60" />
+    <footer className="bg-slate-900 text-white relative overflow-hidden min-h-[600px]">
+      {/* Animated Background Boxes */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <Boxes />
       </div>
       
-      {/* Main Footer */}
-      <div className="section-container py-16 relative z-20">
+      {/* Gradient Overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/90 to-slate-900/95 z-10" />
+      
+      {/* Main Footer Content */}
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-1">
@@ -26,16 +29,32 @@ export const Footer = () => {
               Revolutionizing privacy solutions across India with innovative, accessible, and culturally sensitive design.
             </p>
             <div className="flex space-x-4">
-              <Button variant="ghost" size="icon" className="text-white hover:text-blue-300 hover:bg-white/10 hover:scale-110 transition-all duration-300">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="text-white hover:text-blue-300 hover:bg-white/10 hover:scale-110 transition-all duration-300"
+              >
                 <Linkedin className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="text-white hover:text-blue-300 hover:bg-white/10 hover:scale-110 transition-all duration-300">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="text-white hover:text-blue-300 hover:bg-white/10 hover:scale-110 transition-all duration-300"
+              >
                 <Twitter className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="text-white hover:text-blue-300 hover:bg-white/10 hover:scale-110 transition-all duration-300">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="text-white hover:text-blue-300 hover:bg-white/10 hover:scale-110 transition-all duration-300"
+              >
                 <Instagram className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="text-white hover:text-blue-300 hover:bg-white/10 hover:scale-110 transition-all duration-300">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="text-white hover:text-blue-300 hover:bg-white/10 hover:scale-110 transition-all duration-300"
+              >
                 <Youtube className="h-5 w-5" />
               </Button>
             </div>
@@ -45,11 +64,31 @@ export const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-6">Products</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Wall-Mounted Prive Box</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Stationary Prive Box</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Portable Prive Box</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Custom Solutions</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Accessories</a></li>
+              <li>
+                <a href="#" className="text-white/80 hover:text-white transition-colors">
+                  Wall-Mounted Prive Box
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-white/80 hover:text-white transition-colors">
+                  Stationary Prive Box
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-white/80 hover:text-white transition-colors">
+                  Portable Prive Box
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-white/80 hover:text-white transition-colors">
+                  Custom Solutions
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-white/80 hover:text-white transition-colors">
+                  Accessories
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -57,11 +96,31 @@ export const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-6">Company</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Leadership Team</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Press & Media</a></li>
-              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Investor Relations</a></li>
+              <li>
+                <a href="#" className="text-white/80 hover:text-white transition-colors">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-white/80 hover:text-white transition-colors">
+                  Leadership Team
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-white/80 hover:text-white transition-colors">
+                  Careers
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-white/80 hover:text-white transition-colors">
+                  Press & Media
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-white/80 hover:text-white transition-colors">
+                  Investor Relations
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -91,9 +150,9 @@ export const Footer = () => {
               <div className="flex space-x-2">
                 <Input 
                   placeholder="Your email" 
-                  className="bg-white/10 border-white/30 text-white placeholder:text-white/50"
+                  className="bg-white/10 border-white/30 text-white placeholder:text-white/50 focus:bg-white/20"
                 />
-                <Button size="sm" variant="secondary">
+                <Button size="sm" variant="secondary" className="hover:scale-105 transition-transform">
                   Subscribe
                 </Button>
               </div>
@@ -102,18 +161,25 @@ export const Footer = () => {
         </div>
       </div>
 
+      {/* Separator */}
       <Separator className="bg-white/20 relative z-20" />
 
       {/* Bottom Footer */}
-      <div className="section-container py-6 relative z-20">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="text-white/80 text-sm">
             © 2024 Privoxx Privacy Solutions. All rights reserved.
           </div>
           <div className="flex space-x-6 text-sm">
-            <a href="#" className="text-white/80 hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="text-white/80 hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="text-white/80 hover:text-white transition-colors">Cookie Policy</a>
+            <a href="#" className="text-white/80 hover:text-white transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#" className="text-white/80 hover:text-white transition-colors">
+              Terms of Service
+            </a>
+            <a href="#" className="text-white/80 hover:text-white transition-colors">
+              Cookie Policy
+            </a>
           </div>
         </div>
       </div>
