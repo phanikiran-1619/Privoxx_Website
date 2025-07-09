@@ -53,11 +53,11 @@ export const AnimatedNavbar = () => {
     
     switch (navState) {
       case 'bubble':
-        return `${baseClasses} bg-gradient-to-br from-cyan-300/20 via-blue-300/15 to-cyan-400/20 border border-cyan-200/30 rounded-full p-3 w-16 h-16 flex items-center justify-center shadow-[0_8px_32px_rgba(6,182,212,0.2)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.3)] origin-center`;
+        return `${baseClasses} bg-gradient-to-br from-cyan-300/35 via-blue-300/30 to-cyan-400/35 border border-cyan-200/50 rounded-full p-3 w-16 h-16 flex items-center justify-center shadow-[0_8px_32px_rgba(6,182,212,0.3)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.4)] origin-center`;
       case 'expanded':
-        return `${baseClasses} bg-gradient-to-r from-cyan-300/15 via-blue-200/10 to-cyan-300/15 border border-cyan-200/25 rounded-full px-8 py-4 flex items-center justify-between min-w-[680px] shadow-[0_12px_48px_rgba(6,182,212,0.15)] hover:shadow-[0_16px_56px_rgba(6,182,212,0.25)] origin-center`;
+        return `${baseClasses} bg-gradient-to-r from-cyan-300/30 via-blue-200/25 to-cyan-300/30 border border-cyan-200/40 rounded-full px-8 py-4 flex items-center justify-between min-w-[720px] shadow-[0_12px_48px_rgba(6,182,212,0.25)] hover:shadow-[0_16px_56px_rgba(6,182,212,0.35)] origin-center`;
       case 'bubble-right':
-        return `${baseClasses} bg-gradient-to-br from-cyan-300/20 via-blue-300/15 to-cyan-400/20 border border-cyan-200/30 rounded-full p-3 w-16 h-16 flex items-center justify-center shadow-[0_8px_32px_rgba(6,182,212,0.2)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.3)] origin-right`;
+        return `${baseClasses} bg-gradient-to-br from-cyan-300/35 via-blue-300/30 to-cyan-400/35 border border-cyan-200/50 rounded-full p-3 w-16 h-16 flex items-center justify-center shadow-[0_8px_32px_rgba(6,182,212,0.3)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.4)] origin-right`;
       default:
         return baseClasses;
     }
