@@ -5,10 +5,12 @@ import { Testimonials } from "@/components/Testimonials";
 import { BookingForm } from "@/components/BookingForm";
 import { CompanyLeadership } from "@/components/CompanyLeadership";
 import { Footer } from "@/components/Footer";
+import { AnimatedNavbar } from "@/components/AnimatedNavbar";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <AnimatedNavbar />
       <HeroSection />
       <ProductDetails />
       <PrivacyBenefits />

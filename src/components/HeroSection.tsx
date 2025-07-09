@@ -13,29 +13,6 @@ export const HeroSection = () => {
         }} />
       </div>
 
-      {/* Header with Logo */}
-      <header className="relative z-10 section-container pt-8">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <img src={logoIP} alt="Privoxx IP Logo" className="h-12 w-12" />
-            <span className="text-2xl font-bold text-primary-foreground">Privoxx</span>
-          </div>
-          <nav className="hidden md:flex items-center space-x-8">
-            <a href="#products" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-              Products
-            </a>
-            <a href="#testimonials" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-              Reviews
-            </a>
-            <a href="#company" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-              Company
-            </a>
-            <Button variant="outline" size="sm" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-              Contact Us
-            </Button>
-          </nav>
-        </div>
-      </header>
 
       {/* Hero Content */}
       <div className="relative z-10 section-container">
