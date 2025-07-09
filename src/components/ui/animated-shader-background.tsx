@@ -71,16 +71,37 @@ const AnimatedShaderBackground = () => {
             v = p + cos(i * i + (iTime + p.x * 0.08) * 0.025 + i * vec2(13.0, 11.0)) * 3.5 + vec2(sin(iTime * 3.0 + i) * 0.003, cos(iTime * 3.5 - i) * 0.003);
             float tailNoise = fbm(v + vec2(iTime * 0.5, i)) * 0.3 * (1.0 - (i / 35.0));
             
-            // Custom colors matching Privoxx brand
-            vec4 auroraColors = vec4(
-              0.2 + 0.4 * sin(i * 0.2 + iTime * 0.4), // Primary blue tones
-              0.4 + 0.6 * cos(i * 0.3 + iTime * 0.5), // Secondary blue variations
-              0.8 + 0.2 * sin(i * 0.4 + iTime * 0.3), // Bright accent
-              0.6 // Reduced opacity for subtlety
-            );
+            // Determine if this meteor should have neon effect (only some)
+            bool isNeon = mod(i, 7.0) < 2.0; // Every 7th and 8th meteor gets neon
+            
+            vec4 auroraColors;
+            if (isNeon) {
+              // Neon white/cyan meteors with glow
+              auroraColors = vec4(
+                0.9 + 0.1 * sin(iTime * 2.0 + i), // Bright white
+                0.95 + 0.05 * cos(iTime * 2.5 + i), // Slightly cyan
+                1.0, // Pure white/cyan
+                0.8 + 0.2 * sin(iTime * 3.0 + i) // Pulsing opacity
+              );
+            } else {
+              // Dark blue and white meteors
+              float blueWhiteMix = sin(i * 0.3 + iTime * 0.2) * 0.5 + 0.5;
+              auroraColors = vec4(
+                0.1 + 0.7 * blueWhiteMix, // Mix between dark blue and white
+                0.2 + 0.6 * blueWhiteMix, // Blue component
+                0.4 + 0.6 * blueWhiteMix, // More blue for dark meteors, white for bright ones
+                0.5 + 0.3 * blueWhiteMix // Varying opacity
+              );
+            }
             
             vec4 currentContribution = auroraColors * exp(sin(i * i + iTime * 0.8)) / length(max(v, vec2(v.x * f * 0.015, v.y * 1.5)));
-            float thinnessFactor = smoothstep(0.0, 1.0, i / 35.0) * 0.4; // Reduced intensity
+            
+            // Add extra glow for neon meteors
+            if (isNeon) {
+              currentContribution *= 1.5 + 0.5 * sin(iTime * 4.0 + i);
+            }
+            
+            float thinnessFactor = smoothstep(0.0, 1.0, i / 35.0) * 0.4;
             o += currentContribution * (1.0 + tailNoise * 0.8) * thinnessFactor;
           }
 
