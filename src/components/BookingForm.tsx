@@ -85,6 +85,8 @@ export const BookingForm = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="wall-mounted">Wall-Mounted Prive Box</SelectItem>
+                        <SelectItem value="stationary">Stationary Prive Box</SelectItem>
+                        <SelectItem value="portable">Portable Prive Box</SelectItem>
                         <SelectItem value="custom">Custom Solution</SelectItem>
                       </SelectContent>
                     </Select>
@@ -196,16 +198,25 @@ export const BookingForm = () => {
                     />
                   </div>
 
-                  {/* Submit Button */}
-                  <div className="pt-4">
+                  {/* Submit Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
                     <Button 
                       type="submit" 
                       size="lg" 
-                      className="btn-hero w-full"
+                      className="btn-hero flex-1"
                       disabled={isLoading}
                     >
                       {isLoading ? "Booking Demo..." : "Book Demo Now"}
                       <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                    <Button 
+                      type="button" 
+                      variant="outline" 
+                      size="lg"
+                      className="flex-1"
+                    >
+                      Get Custom Quote
+                      <Calculator className="ml-2 h-5 w-5" />
                     </Button>
                   </div>
                 </form>
@@ -236,6 +247,20 @@ export const BookingForm = () => {
               </CardContent>
             </Card>
 
+            {/* Download Brochure */}
+            <Card className="shadow-medium bg-accent">
+              <CardContent className="p-6 text-center">
+                <Download className="h-12 w-12 text-primary mx-auto mb-4" />
+                <h3 className="font-bold text-primary mb-2">Product Brochure</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Download detailed specifications and pricing information.
+                </p>
+                <Button variant="outline" className="w-full">
+                  <Download className="mr-2 h-4 w-4" />
+                  Download PDF
+                </Button>
+              </CardContent>
+            </Card>
 
             {/* Demo Benefits */}
             <Card className="shadow-medium">
