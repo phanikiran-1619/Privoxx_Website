@@ -1,6 +1,7 @@
+import { AnimatedNavbar } from "@/components/AnimatedNavbar";
 import { HeroSection } from "@/components/HeroSection";
 import { ProductDetails } from "@/components/ProductDetails";
-import { PrivacyBenefits } from "@/components/PrivacyBenefits";
+import { ScrollingPrivacyBenefits } from "@/components/ScrollingPrivacyBenefits";
 import { Testimonials } from "@/components/Testimonials";
 import { BookingForm } from "@/components/BookingForm";
 import { CompanyLeadership } from "@/components/CompanyLeadership";
@@ -9,9 +10,10 @@ import { Footer } from "@/components/Footer";
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <AnimatedNavbar />
       <HeroSection />
       <ProductDetails />
-      <PrivacyBenefits />
+      <ScrollingPrivacyBenefits />
       <Testimonials />
       <BookingForm />
       <CompanyLeadership />

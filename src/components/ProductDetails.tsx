@@ -5,57 +5,31 @@ import wallMountedImage from "@/assets/wall-mounted.jpg";
 import stationaryImage from "@/assets/stationary.jpg";
 import portableImage from "@/assets/portable.jpg";
 
-const products = [
-  {
-    id: 'wall-mounted',
-    title: 'Wall-Mounted Prive Box',
-    subtitle: 'Flagship Solution',
-    description: 'Transform any wall into instant privacy space',
-    image: wallMountedImage,
-    icon: Home,
-    features: [
-      'Pull-down mechanism',
-      'Minimal space required',
-      'No renovation needed',
-      'Premium materials'
-    ],
-    useCases: ['Homes', 'PGs', 'Hostels', 'Hotels'],
-    price: '₹24,999',
-    popular: true
-  },
-  {
-    id: 'stationary',
-    title: 'Stationary Prive Box',
-    subtitle: 'Permanent Solution',
-    description: 'Permanent privacy solution for high-traffic areas',
-    image: stationaryImage,
-    icon: Building,
-    features: [
-      'Weather-resistant',
-      'Durable construction',
-      'Gender-neutral design',
-      'Easy maintenance'
-    ],
-    useCases: ['Swimming pools', 'Temples', 'Events', 'Public spaces'],
-    price: '₹34,999'
-  },
-  {
-    id: 'portable',
-    title: 'Portable Prive Box',
-    subtitle: 'Travel Solution',
-    description: 'Carry privacy wherever you go',
-    image: portableImage,
-    icon: Backpack,
-    features: [
-      'Lightweight design',
-      'Instant setup',
-      'Travel-friendly',
-      'Compact storage'
-    ],
-    useCases: ['Trekking', 'Field work', 'Outdoor events', 'Camping'],
-    price: '₹19,999'
-  }
-];
+const wallMountedProduct = {
+  id: 'wall-mounted',
+  title: 'Wall-Mounted Prive Box',
+  subtitle: 'Flagship Solution',
+  description: 'Transform any wall into instant privacy space with our revolutionary pull-down mechanism',
+  image: wallMountedImage,
+  icon: Home,
+  features: [
+    'Pull-down mechanism',
+    'Minimal space required',
+    'No renovation needed',
+    'Premium materials',
+    'Easy installation',
+    'Antimicrobial coating'
+  ],
+  useCases: ['Homes', 'PGs', 'Hostels', 'Hotels', 'Offices', 'Clinics'],
+  price: '₹24,999',
+  specifications: [
+    'Dimensions: 180cm x 80cm when deployed',
+    'Weight: 12kg',
+    'Material: High-grade polymer',
+    'Installation: Wall-mounted bracket system',
+    'Warranty: 3 years comprehensive'
+  ]
+};
 
 export const ProductDetails = () => {
   return (
@@ -71,95 +45,106 @@ export const ProductDetails = () => {
           </p>
         </div>
 
-        {/* Products Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {products.map((product, index) => {
-            const IconComponent = product.icon;
-            return (
-              <Card 
-                key={product.id} 
-                className={`card-hover group overflow-hidden ${product.popular ? 'ring-2 ring-secondary' : ''}`}
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                {product.popular && (
-                  <div className="bg-secondary text-secondary-foreground text-center py-2 text-sm font-semibold">
-                    Most Popular
-                  </div>
-                )}
-                
-                <div className="relative overflow-hidden rounded-t-xl">
-                  <img 
-                    src={product.image} 
-                    alt={product.title}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 left-4 bg-primary text-primary-foreground p-3 rounded-full">
-                    <IconComponent className="h-6 w-6" />
+        {/* Single Product - Horizontal Layout */}
+        <div className="mb-16">
+          <Card className="card-hover group overflow-hidden ring-2 ring-secondary">
+            <div className="bg-secondary text-secondary-foreground text-center py-3 text-sm font-semibold">
+              Most Popular - Flagship Solution
+            </div>
+            
+            <div className="grid lg:grid-cols-2 gap-8 p-8">
+              {/* Left - Image */}
+              <div className="relative overflow-hidden rounded-xl">
+                <img 
+                  src={wallMountedProduct.image} 
+                  alt={wallMountedProduct.title}
+                  className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4 bg-primary text-primary-foreground p-4 rounded-full">
+                  <Home className="h-8 w-8" />
+                </div>
+                <div className="absolute bottom-4 right-4 bg-secondary text-secondary-foreground px-4 py-2 rounded-lg font-bold text-lg">
+                  {wallMountedProduct.price}
+                </div>
+              </div>
+
+              {/* Right - Content */}
+              <div className="space-y-6">
+                <div>
+                  <span className="text-sm text-secondary font-medium uppercase tracking-wide">
+                    {wallMountedProduct.subtitle}
+                  </span>
+                  <h3 className="text-3xl font-bold text-primary mt-2 mb-4">
+                    {wallMountedProduct.title}
+                  </h3>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    {wallMountedProduct.description}
+                  </p>
+                </div>
+
+                {/* Features Grid */}
+                <div>
+                  <h4 className="font-bold text-primary mb-4 text-lg">Key Features:</h4>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {wallMountedProduct.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center">
+                        <Check className="h-5 w-5 text-secondary mr-3 flex-shrink-0" />
+                        <span className="text-muted-foreground">{feature}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                <CardContent className="p-6">
-                  <div className="mb-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-secondary font-medium">{product.subtitle}</span>
-                      <span className="text-lg font-bold text-primary">{product.price}</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-primary mb-2">{product.title}</h3>
-                    <p className="text-muted-foreground">{product.description}</p>
+                {/* Specifications */}
+                <div>
+                  <h4 className="font-bold text-primary mb-4 text-lg">Specifications:</h4>
+                  <div className="space-y-2">
+                    {wallMountedProduct.specifications.map((spec, idx) => (
+                      <div key={idx} className="text-sm text-muted-foreground bg-accent rounded-lg px-4 py-2">
+                        {spec}
+                      </div>
+                    ))}
                   </div>
+                </div>
 
-                  {/* Features */}
-                  <div className="mb-4">
-                    <h4 className="font-semibold text-primary mb-2">Key Features:</h4>
-                    <ul className="space-y-1">
-                      {product.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center text-sm text-muted-foreground">
-                          <Check className="h-4 w-4 text-secondary mr-2 flex-shrink-0" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
+                {/* Use Cases */}
+                <div>
+                  <h4 className="font-bold text-primary mb-4 text-lg">Perfect for:</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {wallMountedProduct.useCases.map((useCase, idx) => (
+                      <span 
+                        key={idx}
+                        className="bg-secondary text-secondary-foreground px-4 py-2 rounded-full text-sm font-medium"
+                      >
+                        {useCase}
+                      </span>
+                    ))}
                   </div>
+                </div>
 
-                  {/* Use Cases */}
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-primary mb-2">Perfect for:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {product.useCases.map((useCase, idx) => (
-                        <span 
-                          key={idx}
-                          className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-xs font-medium"
-                        >
-                          {useCase}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <Button className="w-full group" variant={product.popular ? "default" : "outline"}>
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
+                <Button size="lg" className="btn-hero group w-full sm:w-auto">
+                  Book Demo Now
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </div>
+            </div>
+          </Card>
         </div>
 
         {/* CTA Section */}
         <div className="text-center bg-gradient-primary rounded-2xl p-8 text-primary-foreground">
           <h3 className="text-2xl font-bold mb-4">
-            Need a Custom Solution?
+            Ready to Transform Your Space?
           </h3>
           <p className="text-lg mb-6 opacity-90">
-            We can customize our products to meet your specific requirements and space constraints.
+            Experience the Wall-Mounted Prive Box with a personalized demonstration at your location.
           </p>
           <Button 
             size="lg" 
-            variant="outline" 
-            className="btn-outline text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary"
+            className="btn-hero bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+            onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            Get Custom Quote
+            Book Your Demo Today
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
