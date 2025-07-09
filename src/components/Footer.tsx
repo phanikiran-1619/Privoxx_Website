@@ -136,7 +136,14 @@ export const Footer = () => {
                   { Icon: Instagram, color: "hover:text-pink-400", bg: "hover:bg-pink-400/10" },
                   { Icon: Youtube, color: "hover:text-red-400", bg: "hover:bg-red-400/10" },
                 ].map(({ Icon, color, bg }, index) => (
-                  <motion.div key={index}>
+                  <motion.div 
+                    key={index}
+                    whileHover={{ 
+                      scale: 1.15,
+                      transition: { duration: 0.2 }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <Button 
                       variant="ghost" 
                       size="icon" 
@@ -145,11 +152,6 @@ export const Footer = () => {
                         color,
                         bg
                       )}
-                      whileHover={{ 
-                        scale: 1.15,
-                        transition: { duration: 0.2 }
-                      }}
-                      whileTap={{ scale: 0.95 }}
                     >
                       <Icon className="h-5 w-5" />
                     </Button>
