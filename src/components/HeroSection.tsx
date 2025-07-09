@@ -30,8 +30,8 @@ export const HeroSection = () => {
 
 
       {/* Hero Content */}
-      <div className="relative z-10 section-container pt-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen">
+      <div className="relative z-10 section-container pt-16">
+        <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[90vh]">
           {/* Left Column - Content */}
           <div className="space-y-8">
             <div className="space-y-6">

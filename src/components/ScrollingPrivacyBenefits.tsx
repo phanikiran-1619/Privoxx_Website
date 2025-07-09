@@ -115,11 +115,32 @@ export const ScrollingPrivacyBenefits = () => {
               })}
             </div>
 
-            {/* Privacy Statistics Component */}
-            <PrivacyStats />
-            
-            {/* Solution Showcase Component */}
-            <SolutionShowcase />
+            {/* Additional Privacy Benefits */}
+            <div className="space-y-8">
+              <div className="card-hover text-center group transform transition-all duration-500 ease-in-out">
+                <div className="mb-4">
+                  <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <div className="h-10 w-10 text-primary-foreground flex items-center justify-center">🛡️</div>
+                  </div>
+                  <div className="text-4xl font-bold text-primary mb-2">24/7</div>
+                  <div className="text-base text-secondary font-medium">Security Assurance</div>
+                </div>
+                <h3 className="text-2xl font-bold text-primary mb-4">Complete Protection</h3>
+                <p className="text-muted-foreground text-lg leading-relaxed">Round-the-clock privacy protection with advanced security features and tamper-proof design for ultimate peace of mind.</p>
+              </div>
+
+              <div className="card-hover text-center group transform transition-all duration-500 ease-in-out">
+                <div className="mb-4">
+                  <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <div className="h-10 w-10 text-primary-foreground flex items-center justify-center">⚡</div>
+                  </div>
+                  <div className="text-4xl font-bold text-primary mb-2">5min</div>
+                  <div className="text-base text-secondary font-medium">Setup Time</div>
+                </div>
+                <h3 className="text-2xl font-bold text-primary mb-4">Lightning Fast</h3>
+                <p className="text-muted-foreground text-lg leading-relaxed">Ultra-quick installation process that transforms any space into a private sanctuary in just minutes without any tools required.</p>
+              </div>
+            </div>
             
             {/* Expanded Privoxx Difference Section */}
             <div className="bg-accent rounded-2xl p-8 w-full">
