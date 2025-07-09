@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import heroImage from "@/assets/hero-products.jpg";
 import VariableProximity from "@/components/VariableProximity";
+import AnimatedShaderBackground from "@/components/ui/animated-shader-background";
 import { useRef } from "react";
 
 export const HeroSection = () => {
@@ -12,18 +13,19 @@ export const HeroSection = () => {
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-primary bg-[length:400%_400%] animate-[gradient_15s_ease_infinite]" />
       
-
+      {/* Animated Shader Background */}
+      <AnimatedShaderBackground />
       
       {/* Particle Pattern */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }} />
       </div>
       
       {/* Animated Wave Effect */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary-foreground/10 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-secondary/20 to-transparent animate-pulse" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary-foreground/5 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-secondary/10 to-transparent animate-pulse" />
 
 
       {/* Hero Content */}
