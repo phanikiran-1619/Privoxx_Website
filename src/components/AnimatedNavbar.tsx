@@ -53,11 +53,11 @@ export const AnimatedNavbar = () => {
     
     switch (navState) {
       case 'bubble':
-        return `${baseClasses} bg-gradient-to-br from-cyan-300/20 via-blue-300/15 to-cyan-400/20 border border-cyan-200/30 rounded-full p-3 w-16 h-16 flex items-center justify-center shadow-[0_8px_32px_rgba(6,182,212,0.2)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.3)]`;
+        return `${baseClasses} bg-gradient-to-br from-cyan-300/20 via-blue-300/15 to-cyan-400/20 border border-cyan-200/30 rounded-full p-3 w-16 h-16 flex items-center justify-center shadow-[0_8px_32px_rgba(6,182,212,0.2)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.3)] origin-center`;
       case 'expanded':
-        return `${baseClasses} bg-gradient-to-r from-cyan-300/15 via-blue-200/10 to-cyan-300/15 border border-cyan-200/25 rounded-full px-8 py-4 flex items-center justify-between min-w-[600px] shadow-[0_12px_48px_rgba(6,182,212,0.15)] hover:shadow-[0_16px_56px_rgba(6,182,212,0.25)]`;
+        return `${baseClasses} bg-gradient-to-r from-cyan-300/15 via-blue-200/10 to-cyan-300/15 border border-cyan-200/25 rounded-full px-8 py-4 flex items-center justify-between min-w-[680px] shadow-[0_12px_48px_rgba(6,182,212,0.15)] hover:shadow-[0_16px_56px_rgba(6,182,212,0.25)] origin-center`;
       case 'bubble-right':
-        return `${baseClasses} bg-gradient-to-br from-cyan-300/20 via-blue-300/15 to-cyan-400/20 border border-cyan-200/30 rounded-full p-3 w-16 h-16 flex items-center justify-center shadow-[0_8px_32px_rgba(6,182,212,0.2)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.3)]`;
+        return `${baseClasses} bg-gradient-to-br from-cyan-300/20 via-blue-300/15 to-cyan-400/20 border border-cyan-200/30 rounded-full p-3 w-16 h-16 flex items-center justify-center shadow-[0_8px_32px_rgba(6,182,212,0.2)] hover:shadow-[0_12px_40px_rgba(6,182,212,0.3)] origin-right`;
       default:
         return baseClasses;
     }
@@ -114,14 +114,12 @@ export const AnimatedNavbar = () => {
             } group-hover:scale-200 group-hover:opacity-80 animate-pulse`}></div>
           </div>
           
-          {/* Company name - visible in expanded state */}
-          <span className={`font-bold text-primary transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] relative z-10 ${
-            navState === 'expanded' 
-              ? 'text-xl opacity-100 translate-x-0' 
-              : 'text-xl opacity-0 -translate-x-4 absolute'
-          } group-hover:text-cyan-600`}>
-            Privoxx
-          </span>
+          {/* Company name - only visible in expanded state */}
+          {navState === 'expanded' && (
+            <span className="font-bold text-primary transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] relative z-10 text-xl group-hover:text-cyan-600">
+              Privoxx
+            </span>
+          )}
         </div>
 
         {/* Navigation Menu - Only visible in expanded state */}
