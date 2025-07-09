@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import visualLogo from "/visual logo.png";
+import visualLogo from "@/assets/visual-logo.png";
 
 export const AnimatedNavbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);

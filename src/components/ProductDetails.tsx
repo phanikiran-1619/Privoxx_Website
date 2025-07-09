@@ -63,6 +63,7 @@ export const ProductDetails = () => {
                   ) : (
                     <video 
                       controls
+                      autoPlay
                       className="w-full h-full object-cover"
                       poster={productImages[0]}
                     >

@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Youtube } from "lucide-react";
 import { cn } from "@/lib/utils";
-import visualLogo from "/visual logo.png";
+import visualLogo from "@/assets/visual-logo.png";
 
 // Background Boxes Component with enhanced hover effects
 const BackgroundBoxes = () => {
