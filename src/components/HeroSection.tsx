@@ -27,12 +27,12 @@ export const HeroSection = () => {
 
 
       {/* Hero Content */}
-      <div className="relative z-10 section-container pt-16" ref={containerRef}>
-        <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[90vh]">
+      <div className="relative z-10 section-container pt-16 md:pt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center min-h-[90vh]">
           {/* Left Column - Content */}
-          <div className="space-y-8">
+          <div className="space-y-8 text-center lg:text-left">
             <div className="space-y-6">
-              <h1 className="hero-heading animate-fade-in-up">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-tight animate-fade-in-up">
                 <VariableProximity
                   label="Instant Privacy."
                   fromFontVariationSettings="'wght' 700"
@@ -53,64 +53,54 @@ export const HeroSection = () => {
                   />
                 </span>
               </h1>
-              
-              <p className="text-xl md:text-2xl text-primary-foreground/90 leading-relaxed animate-fade-in-up [animation-delay:0.3s]">
+              <p className="text-base sm:text-xl md:text-2xl text-primary-foreground/90 leading-relaxed animate-fade-in-up [animation-delay:0.3s]">
                 Revolutionary foldable changing solutions for modern India - From homes to hostels, events to outdoor spaces
               </p>
             </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up [animation-delay:0.6s]">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in-up [animation-delay:0.6s] justify-center lg:justify-start">
               <Button 
                 size="lg" 
-                className="btn-hero group"
+                className="btn-hero group w-full sm:w-auto"
                 onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Book Your Demo Today
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="btn-outline group"
+                className="btn-outline group w-full sm:w-auto"
               >
                 <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 Watch Product Demo
               </Button>
             </div>
-
-            {/* Trust Indicators */}
-            <div className="flex items-center space-x-8 text-primary-foreground/70 animate-fade-in-up [animation-delay:0.9s]">
+            <div className="flex flex-col md:flex-row md:items-center md:space-x-8 space-y-2 md:space-y-0 text-primary-foreground/70 animate-fade-in-up [animation-delay:0.9s] justify-center lg:justify-start">
               <div className="text-center">
-                <div className="text-2xl font-bold">500+</div>
+                <div className="text-xl sm:text-2xl font-bold">500+</div>
                 <div className="text-sm">Installations</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold">200+</div>
+                <div className="text-xl sm:text-2xl font-bold">200+</div>
                 <div className="text-sm">Happy Customers</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold">25+</div>
+                <div className="text-xl sm:text-2xl font-bold">25+</div>
                 <div className="text-sm">Cities</div>
               </div>
             </div>
           </div>
-
           {/* Right Column - Hero Image */}
-          <div className="relative animate-fade-in-up [animation-delay:0.4s]">
+          <div className="relative animate-fade-in-up [animation-delay:0.4s] mt-8 lg:mt-0 flex justify-center lg:justify-end">
             <div className="relative">
               <img 
                 src={heroImage} 
                 alt="Privoxx Privacy Solutions - Three Product Variants"
-                className="w-full h-auto rounded-2xl shadow-strong"
+                className="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto mx-auto lg:mx-0 rounded-2xl shadow-strong"
               />
-              
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 bg-secondary text-secondary-foreground px-4 py-2 rounded-full text-sm font-semibold shadow-medium animate-float [animation-delay:1.2s]">
+              <div className="absolute -top-4 -right-4 bg-secondary text-secondary-foreground px-4 py-2 rounded-full text-xs sm:text-sm font-semibold shadow-medium animate-float [animation-delay:1.2s]">
                 Coming soon
               </div>
-              
-
             </div>
           </div>
         </div>

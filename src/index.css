@@ -331,3 +331,7 @@
     background-position: 0% 50%;
   }
 }
+
+html {
+  scroll-padding-top: 4.5rem; /* Adjust if your navbar height changes */
+}

@@ -9,7 +9,7 @@ const executives = [
     experience: "15+ years in innovative product development",
     vision: "Leading India's privacy revolution through accessible design solutions",
     linkedin: "#",
-    email: "john@privoxx.com",
+    email: "privoxx.connect@gmail.com",
     avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=face",
     achievements: [
       "Led 3 successful product launches",
@@ -23,7 +23,7 @@ const executives = [
     experience: "12+ years in manufacturing and operations excellence",
     vision: "Scaling production while maintaining the highest quality standards",
     linkedin: "#",
-    email: "sarah@privoxx.com",
+    email: "privoxx.connect@gmail.com",
     avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face",
     achievements: [
       "Optimized production by 40%",
@@ -63,18 +63,18 @@ export const CompanyLeadership = () => {
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               <CardContent className="p-0">
-                <div className="md:flex">
+                <div className="flex flex-col md:flex-row items-center md:items-stretch">
                   {/* Photo */}
-                  <div className="md:w-1/3">
+                  <div className="w-full md:w-1/3 flex justify-center md:block mb-4 md:mb-0">
                     <img 
                       src={executive.avatar} 
                       alt={executive.name}
-                      className="w-full h-64 md:h-full object-cover"
+                      className="w-32 h-32 md:w-full md:h-full object-cover rounded-xl shadow-md mx-auto md:mx-0"
                     />
                   </div>
                   
                   {/* Content */}
-                  <div className="md:w-2/3 p-6">
+                  <div className="w-full md:w-2/3 p-4 md:p-6 flex flex-col justify-center items-center md:items-start text-center md:text-left">
                     <div className="mb-4">
                       <h3 className="text-xl font-bold text-primary mb-1">{executive.name}</h3>
                       <p className="text-secondary font-medium mb-2">{executive.title}</p>

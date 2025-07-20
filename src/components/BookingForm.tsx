@@ -27,25 +27,47 @@ export const BookingForm = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    toast({
-      title: "Demo Booked Successfully!",
-      description: "Our team will contact you within 24 hours to schedule your personalized demo.",
-    });
-
+    try {
+      const response = await fetch('http://localhost:5000/api/book-demo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: `Product Type: ${formData.productType}\nOrganization: ${formData.organization}\nLocation: ${formData.location}\nQuantity: ${formData.quantity}\nRequirements: ${formData.requirements}`
+        })
+      });
+      if (response.ok) {
+        toast({
+          title: "Demo Booked Successfully!",
+          description: "Our team will contact you within 24 hours to schedule your personalized demo.",
+        });
+        setFormData({
+          productType: '',
+          name: '',
+          phone: '',
+          email: '',
+          organization: '',
+          location: '',
+          quantity: '',
+          requirements: ''
+        });
+      } else {
+        toast({
+          title: "Failed to book demo.",
+          description: "There was an error sending your request. Please try again later.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Network Error",
+        description: "Could not connect to the server. Please try again later.",
+        variant: "destructive"
+      });
+    }
     setIsLoading(false);
-    setFormData({
-      productType: '',
-      name: '',
-      phone: '',
-      email: '',
-      organization: '',
-      location: '',
-      quantity: '',
-      requirements: ''
-    });
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -132,7 +154,7 @@ export const BookingForm = () => {
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
                       className="mt-2"
-                      placeholder="your@email.com"
+                      placeholder="privoxx.connect@gmail.com"
                       required
                     />
                   </div>
@@ -227,7 +249,7 @@ export const BookingForm = () => {
                 </div>
                 <div>
                   <div className="font-medium text-primary">Email</div>
-                  <div className="text-muted-foreground">info@privoxx.com</div>
+                  <div className="text-muted-foreground">privoxx.connect@gmail.com</div>
                 </div>
                 <div>
                   <div className="font-medium text-primary">Response Time</div>
