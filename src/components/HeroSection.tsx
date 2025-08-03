@@ -3,6 +3,7 @@ import { ArrowRight, Play } from "lucide-react";
 import heroImage from "@/assets/hero-products.jpg";
 import VariableProximity from "@/components/VariableProximity";
 import { useRef } from "react";
+import { trackButtonClick, trackProductInterest } from "@/lib/analytics";
 
 export const HeroSection = () => {
   const containerRef = useRef(null);
@@ -61,7 +62,10 @@ export const HeroSection = () => {
               <Button 
                 size="lg" 
                 className="btn-hero group w-full sm:w-auto"
-                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => {
+                  trackButtonClick('hero_demo_booking');
+                  document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 Book Your Demo Today
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -70,6 +74,10 @@ export const HeroSection = () => {
                 variant="outline" 
                 size="lg" 
                 className="btn-outline group w-full sm:w-auto"
+                onClick={() => {
+                  trackButtonClick('hero_product_demo');
+                  trackProductInterest('wall_mounted_prive_box');
+                }}
               >
                 <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 Watch Product Demo

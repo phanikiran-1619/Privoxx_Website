@@ -6,8 +6,11 @@ import { Testimonials } from "@/components/Testimonials";
 import { BookingForm } from "@/components/BookingForm";
 import { CompanyLeadership } from "@/components/CompanyLeadership";
 import { Footer } from "@/components/Footer";
+import { useScrollTracking } from "@/hooks/useScrollTracking";
 
 const Index = () => {
+  useScrollTracking();
+
   return (
     <div className="min-h-screen">
       <AnimatedNavbar />

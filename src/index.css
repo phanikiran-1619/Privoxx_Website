@@ -126,6 +126,10 @@
 
   body {
     @apply bg-background text-foreground font-montserrat;
+    padding-top: 4rem; /* Account for fixed header */
+    /* Prevent any movement when scrolling */
+    overflow-x: hidden;
+    position: relative;
   }
 }
 
@@ -168,6 +172,43 @@
 }
 
 @layer utilities {
+  /* Fixed Header Styles */
+  .sticky-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+    /* Mobile-specific improvements */
+    -webkit-transform: translateZ(0) !important;
+    transform: translateZ(0) !important;
+    will-change: transform !important;
+    /* Prevent any movement */
+    transform-style: preserve-3d !important;
+    backface-visibility: hidden !important;
+  }
+
+  /* Ensure header is always on top on mobile */
+  @media (max-width: 768px) {
+    .sticky-header {
+      position: fixed !important;
+      top: 0 !important;
+      z-index: 9999 !important;
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(16px) !important;
+      -webkit-backdrop-filter: blur(16px) !important;
+      /* Force header to stay in place */
+      transform: translateZ(0) !important;
+      -webkit-transform: translateZ(0) !important;
+      will-change: transform !important;
+    }
+  }
+
   /* Background Gradients */
   .bg-gradient-hero {
     background: var(--gradient-hero);
@@ -334,4 +375,22 @@
 
 html {
   scroll-padding-top: 4.5rem; /* Adjust if your navbar height changes */
+  /* Prevent viewport changes on mobile */
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  /* Prevent body from moving when address bar shows/hides */
+  position: relative;
+  min-height: 100vh;
+  /* Use viewport units that account for mobile browser UI */
+  min-height: -webkit-fill-available;
+}
+
+/* Prevent mobile browser address bar from affecting layout */
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+  }
 }

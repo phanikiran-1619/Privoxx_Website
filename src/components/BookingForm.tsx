@@ -7,6 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Download, Calculator } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { trackFormSubmission, trackDemoBooking } from "@/lib/analytics";
+import { LoadingSpinner } from "@/components/LoadingSpinner";
 
 export const BookingForm = () => {
   const { toast } = useToast();
@@ -27,8 +29,12 @@ export const BookingForm = () => {
     e.preventDefault();
     setIsLoading(true);
 
+    // Track form submission
+    trackFormSubmission('demo_booking');
+    trackDemoBooking();
+
     try {
-      const response = await fetch('http://localhost:5000/api/book-demo', {
+      const response = await fetch('http://localhost:3001/api/book-demo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -38,10 +44,12 @@ export const BookingForm = () => {
           message: `Product Type: ${formData.productType}\nOrganization: ${formData.organization}\nLocation: ${formData.location}\nQuantity: ${formData.quantity}\nRequirements: ${formData.requirements}`
         })
       });
+      
       if (response.ok) {
+        const result = await response.json();
         toast({
           title: "Demo Booked Successfully!",
-          description: "Our team will contact you within 24 hours to schedule your personalized demo.",
+          description: result.message || "Our team will contact you within 24 hours to schedule your personalized demo.",
         });
         setFormData({
           productType: '',
@@ -61,9 +69,10 @@ export const BookingForm = () => {
         });
       }
     } catch (error) {
+      console.error('Network error:', error);
       toast({
         title: "Network Error",
-        description: "Could not connect to the server. Please try again later.",
+        description: "Could not connect to the server. Please ensure the backend is running on port 3001.",
         variant: "destructive"
       });
     }
@@ -144,6 +153,7 @@ export const BookingForm = () => {
                     </div>
                   </div>
 
+                  {/* Email - Major Field */}
                   <div>
                     <Label htmlFor="email" className="text-base font-medium">
                       Email Address *
@@ -176,7 +186,7 @@ export const BookingForm = () => {
                     </div>
                     <div>
                       <Label htmlFor="location" className="text-base font-medium">
-                        Location (City/State)
+                        Location (City/State) *
                       </Label>
                       <Input
                         id="location"
@@ -185,13 +195,15 @@ export const BookingForm = () => {
                         onChange={(e) => handleInputChange('location', e.target.value)}
                         className="mt-2"
                         placeholder="Mumbai, Maharashtra"
+                        required
                       />
                     </div>
                   </div>
 
+                  {/* Quantity - Major Field */}
                   <div>
                     <Label htmlFor="quantity" className="text-base font-medium">
-                      Quantity Required
+                      Quantity Required *
                     </Label>
                     <Input
                       id="quantity"
@@ -201,6 +213,7 @@ export const BookingForm = () => {
                       className="mt-2"
                       placeholder="Number of units needed"
                       min="1"
+                      required
                     />
                   </div>
 
@@ -226,8 +239,17 @@ export const BookingForm = () => {
                       className="btn-hero w-full"
                       disabled={isLoading}
                     >
-                      {isLoading ? "Booking Demo..." : "Book Demo Now"}
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                      {isLoading ? (
+                        <>
+                          <LoadingSpinner size="sm" />
+                          <span className="ml-2">Booking Demo...</span>
+                        </>
+                      ) : (
+                        <>
+                          Book Demo Now
+                          <ArrowRight className="ml-2 h-5 w-5" />
+                        </>
+                      )}
                     </Button>
                   </div>
                 </form>

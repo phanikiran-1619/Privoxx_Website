@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import visualLogo from "@/assets/visual-logo.png";
 import privoxxWordmark from "@/assets/privoxx-wordmark.png";
@@ -7,10 +7,43 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerClose } from 
 
 export const AnimatedNavbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Only change background opacity, don't move the header
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    // Prevent mobile browser address bar from affecting header position
+    const preventHeaderMovement = () => {
+      const header = document.querySelector('.sticky-header') as HTMLElement;
+      if (header) {
+        header.style.position = 'fixed';
+        header.style.top = '0';
+        header.style.left = '0';
+        header.style.right = '0';
+        header.style.zIndex = '9999';
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', preventHeaderMovement);
+    window.addEventListener('orientationchange', preventHeaderMovement);
+    
+    // Initial call
+    preventHeaderMovement();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', preventHeaderMovement);
+      window.removeEventListener('orientationchange', preventHeaderMovement);
+    };
+  }, []);
 
   return (
-    <header className="w-full fixed top-0 left-0 z-50 bg-white/80 backdrop-blur border-b border-gray-100 shadow-sm">
-      <nav className="container mx-auto flex items-center justify-between h-16 px-4 md:px-8">
+    <header className={`sticky-header w-full transition-colors duration-300 ${isScrolled ? 'shadow-lg' : ''}`}>
+      <nav className="container mx-auto flex items-center justify-between h-16 px-4 md:px-8 min-h-[4rem]">
         {/* Logo */}
         <a href="#" className="flex items-center gap-1">
           <img src={visualLogo} alt="Privoxx Logo" className="w-10 h-10 md:w-12 md:h-12 object-contain" />
