@@ -172,6 +172,27 @@
 }
 
 @layer utilities {
+  /* GSAP Animation Enhancements */
+  .form-field {
+    @apply transition-all duration-300;
+  }
+  
+  .form-field:hover {
+    @apply transform translate-y-[-2px];
+  }
+  
+  .contact-item {
+    @apply transition-all duration-300 hover:translate-x-2;
+  }
+  
+  .benefit-item {
+    @apply transition-all duration-300 hover:translate-x-2 hover:text-primary;
+  }
+  
+  .nav-link {
+    @apply transition-all duration-300 hover:transform hover:scale-105;
+  }
+
   /* Fixed Header Styles */
   .sticky-header {
     position: fixed !important;
@@ -265,6 +286,40 @@
   }
 }
 
+/* Enhanced GSAP Animations */
+@keyframes morphing {
+  0%, 100% {
+    border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+  }
+  34% {
+    border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+  }
+  67% {
+    border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+  }
+}
+
+.morphing-bg {
+  animation: morphing 8s ease-in-out infinite;
+}
+
+@keyframes textShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.text-shine {
+  background: linear-gradient(90deg, #4982c3, #27326e, #4982c3);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShine 3s ease-in-out infinite;
+}
+
 /* Custom Keyframes */
 @keyframes float {
   0%, 100% {
@@ -273,6 +328,19 @@
   50% {
     transform: translateY(-10px);
   }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(79, 130, 195, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(79, 130, 195, 0.6);
+  }
+}
+
+.glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
 }
 
 /* Water Effect Animations */
@@ -371,6 +439,17 @@
   100% {
     background-position: 0% 50%;
   }
+}
+
+/* Smooth scrolling for all elements */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced hover effects */
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
 html {
